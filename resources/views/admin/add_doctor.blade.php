@@ -16,8 +16,9 @@
         <!-- partial -->
         <div class="main-panel ">
           <div class="content-wrapper">
-
+            
             <h1 class="text-center display-3">Add Doctor</h1>
+
             <div class="">
                 <form action="/upload_doctor" method="POST" enctype="multipart/form-data">
                   @csrf

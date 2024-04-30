@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
-
+use App\Models\Doctor;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +24,10 @@ Route::get('/home' , [HomeController::class , 'index']);
 Route::get('/add_doctor_view' , [AdminController::class , 'addview']);
 Route::post('/upload_doctor' , [AdminController::class , 'upload']);
 
+Route::post('/appointment' , [HomeController::class , 'appointment']);
+Route::get('/myappointment' , [HomeController::class , 'myappointment']);
+Route::get('/cancel_appointment/{id}' , [HomeController::class , 'cancel_appointment']);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -32,7 +36,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         if(Auth::id()){
             if(Auth::User()->usertype=='0'){
-                return view('user.home');
+                $doctor = doctor::all();
+                return view('user.home' , compact('doctor'));
             }
             else{
                 return view('admin.home');

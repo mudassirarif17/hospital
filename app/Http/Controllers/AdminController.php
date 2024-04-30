@@ -22,6 +22,6 @@ class AdminController extends Controller
         $doctor->room = $request->room;
         $doctor->speciality = $request->speciality;
         $doctor->save();
-        return redirect()->back();
+        return redirect()->back()->with('message' , "New Dr has been added");
     }
 }
