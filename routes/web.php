@@ -23,6 +23,9 @@ Route::get('/home' , [HomeController::class , 'index']);
 
 Route::get('/add_doctor_view' , [AdminController::class , 'addview']);
 Route::post('/upload_doctor' , [AdminController::class , 'upload']);
+Route::get('/show_appointments' , [AdminController::class , 'show_appointments']);
+Route::get('/canceled_appointment/{id}' , [AdminController::class , 'canceled']);
+Route::get('/approved_appointment/{id}' , [AdminController::class , 'approved']);
 
 Route::post('/appointment' , [HomeController::class , 'appointment']);
 Route::get('/myappointment' , [HomeController::class , 'myappointment']);
