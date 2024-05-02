@@ -44,4 +44,38 @@ class AdminController extends Controller
         $data->save();
         return redirect()->back();
     }
+
+    public function show_doctors(){
+        $data = doctor::all();
+        return view('admin.show_doctors' , compact('data'));
+    }
+
+    public function delete_doctor($id){
+        $data = doctor::find($id);
+        $data->delete();
+        return redirect()->back();
+    }
+
+    public function update_doctor($id){
+        $data = doctor::find($id);
+        return view('admin.update_doctor' , compact('data'));
+    }
+
+    public function edit_doctor(Request $request , $id){
+        $data = doctor::find($id);
+        $data->name = $request->name;
+        $data->phone = $request->phone;
+        $data->speciality = $request->speciality;
+        $data->room = $request->room;
+        $image = $request->file;
+        
+            $imagename = time().'.'.$image->getClientOriginalExtension();
+            $request->file->move('doctorimage' , $imagename);
+            $doctor->image = $imagename;
+        
+        
+        $data->save();
+        return redirect()->back();
+        
+    }
 }

@@ -24,8 +24,13 @@ Route::get('/home' , [HomeController::class , 'index']);
 Route::get('/add_doctor_view' , [AdminController::class , 'addview']);
 Route::post('/upload_doctor' , [AdminController::class , 'upload']);
 Route::get('/show_appointments' , [AdminController::class , 'show_appointments']);
+Route::get('/show_doctors' , [AdminController::class , 'show_doctors']);
 Route::get('/canceled_appointment/{id}' , [AdminController::class , 'canceled']);
 Route::get('/approved_appointment/{id}' , [AdminController::class , 'approved']);
+Route::get('/delete_doctor/{id}' , [AdminController::class , 'delete_doctor']);
+Route::get('/update_doctor/{id}' , [AdminController::class , 'update_doctor']);
+Route::post('/edit_doctor/{id}' , [AdminController::class , 'edit_doctor']);
+
 
 Route::post('/appointment' , [HomeController::class , 'appointment']);
 Route::get('/myappointment' , [HomeController::class , 'myappointment']);
