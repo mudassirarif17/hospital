@@ -67,15 +67,26 @@ class AdminController extends Controller
         $data->phone = $request->phone;
         $data->speciality = $request->speciality;
         $data->room = $request->room;
-        $image = $request->file;
-        
-            $imagename = time().'.'.$image->getClientOriginalExtension();
-            $request->file->move('doctorimage' , $imagename);
-            $doctor->image = $imagename;
+
+        // Check if there's an image uploaded
+    if($request->hasFile('image')){
+
+        // Get the image file from the request
+        $image = $request->file('image');
+
+        // Generate a unique name for the image
+        $imageName = time().'.'.$image->getClientOriginalExtension();
+
+        // Move the uploaded file to the desired location
+        $image->move('doctorimage', $imageName);
+
+        // Update the doctor's image field with the new image name
+        $data->image = $imageName;
+    }
         
         
         $data->save();
-        return redirect()->back();
+        return redirect("/show_doctors");
         
     }
 }
